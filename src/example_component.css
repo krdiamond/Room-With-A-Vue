@@ -1,0 +1,9 @@
+/* CSS for the example_component goes here goes here */
+
+.hide_class {
+  display: none;
+}
+
+.flip {
+  transform: scaleY(-1);
+}

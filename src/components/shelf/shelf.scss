@@ -1,0 +1,39 @@
+// --------------------------------- SHELF --------------------------------- //
+#shelf-area {
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  width: 116%;
+  left: -8%;
+}
+// ------------------------------ WATERING CAN------------------------------- //
+#watering-can {
+  position: absolute;
+  bottom: 14px;
+  width: 30%;
+  right: 13%;
+  z-index: 1;
+}
+
+#water {
+  position: absolute;
+  left: -150px;
+  bottom: -200px;
+  @media (max-width: 700px) {
+    left: -81%;
+    bottom: -115%;
+  }
+}
+// --------------------------------- PLANT----------------------------------- //
+#planter {
+  position: absolute;
+  bottom: 14px;
+  width: 20%;
+  left: 13%;
+}
+
+.planter-pour-zone {
+  height: 300px;
+  width: 100%;
+  margin: 20% 100%;
+}

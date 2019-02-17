@@ -1,11 +1,19 @@
 <template>
-
   <div id="shelf-area">
 
+    <img id="shelf"  :src="shelfImage"/>
 
-    <img id="shelf" class="drop-zone" :src="shelfImage"/>
+    <div id="watering-can" class="draggable">
+        <img id="titled-watering-can" v-if="canIsPouring" :src="wateringCanTiltedImage"/>
+        <img id="water" v-if="canIsPouring" :src="waterImage"/>
+        <img v-else :src="wateringCanImage"/>
+    </div>
 
-    <img id="watering-can" class="draggable" :src="wateringCanImage"/>
+    <div id="planter" class="">
+      <div class="planter-pour-zone"></div>
+      <img :src="planterImage"/>
+    </div>
+
 
   </div>
 </template>
@@ -15,6 +23,9 @@
 import shelfFile from "./images/shelf.png"
 import interact from 'interact.js';
 import wateringCanFile from "./images/watering-can.png"
+import wateringCanTiltedFile from "./images/watering-can-tilted.png"
+import waterFile from "./images/water.gif"
+import planterFile from "./images/planter.png"
 
 export default {
   name: 'shelf',
@@ -22,6 +33,10 @@ export default {
     return {
       shelfImage: shelfFile,
       wateringCanImage: wateringCanFile,
+      wateringCanTiltedImage: wateringCanTiltedFile,
+      waterImage: waterFile,
+      planterImage: planterFile,
+      canIsPouring: false,
     }
   },
   mounted() {
@@ -36,59 +51,37 @@ export default {
         endOnly: true
       },
     });
-    interact('.drop-zone')
+    interact('.planter-pour-zone')
     .dropzone({
-      overlap: 0,
-      ondrop: this.onDropListener,
+      overlap: .5,
+      ondrop: this.onDrop,
+      ondragenter: this.dragEnter,
+      ondragleave: this.dragLeave,
     })
   },
   methods: {
-    dragMoveListener (event) {
+    dragMoveListener(event) {
       var target = event.target,
           x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
           y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-      // translate the element's CSS/Styling (tilts watering can)
+      // translate the element's CSS/Styling (so that it can move starting from the line above data positioning)
       target.style.webkitTransform = 'translate(' + x + 'px, ' + y + 'px)';
-      target.style.transform = 'translate(' + x + 'px, ' + y + 'px) rotate('+ '-60' + 'deg)';
-      // update the posiion attributes
+      target.style.transform = 'translate(' + x + 'px, ' + y + 'px) rotate('+ '0' + 'deg)';
+      // update the posiion attributes so that it keeps moving
       target.setAttribute('data-x', x);
       target.setAttribute('data-y', y);
     },
-    onDropListener (event) {
-      var target = event.relatedTarget,
-          x = (parseFloat(target.getAttribute('data-x')) || 0),
-          y = (parseFloat(target.getAttribute('data-y')) || 0);
-          //untilts watering can
-     target.style.transform = 'translate(' + x + 'px, ' + y + 'px) rotate('+ '0' + 'deg)';
-
+    dragEnter() {
+      this.canIsPouring = true;
+    },
+    dragLeave() {
+      this.canIsPouring = false;
+    },
+    onDrop() {
+      this.canIsPouring = false;
     }
   }
 }
 </script>
 
-
-
-interact(element)
-  .draggable({
-    snap: {
-      targets: [
-        interact.createSnapGrid({ x: 30, y: 30 })
-      ],
-      range: Infinity,
-      relativePoints: [ { x: 0, y: 0 } ]
-    },
-    inertia: true,
-    restrict: {
-      restriction: element.parentNode,
-      elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-      endOnly: true
-    }
-  })
-  .on('dragmove', function (event) {
-    x += event.dx;
-    y += event.dy;
-
-    event.target.style.webkitTransform =
-    event.target.style.transform =
-        'translate(' + x + 'px, ' + y + 'px)';
-  });
+<style lang="scss" src="./shelf.scss"></style>

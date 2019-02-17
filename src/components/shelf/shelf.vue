@@ -53,7 +53,7 @@ export default {
     });
     interact('.planter-pour-zone')
     .dropzone({
-      overlap: .5,
+      overlap: .4,
       ondrop: this.onDrop,
       ondragenter: this.dragEnter,
       ondragleave: this.dragLeave,

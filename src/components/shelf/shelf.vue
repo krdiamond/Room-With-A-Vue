@@ -9,11 +9,9 @@
         <img v-else :src="wateringCanImage"/>
     </div>
 
-    <div id="planter" class="">
-      <div class="planter-pour-zone"></div>
-      <img :src="planterImage"/>
-    </div>
-
+    <div class="planter-pour-zone"></div>
+    
+    <Plant/>
 
   </div>
 </template>
@@ -25,17 +23,19 @@ import interact from 'interact.js';
 import wateringCanFile from "./images/watering-can.png"
 import wateringCanTiltedFile from "./images/watering-can-tilted.png"
 import waterFile from "./images/water.gif"
-import planterFile from "./images/planter.png"
+import Plant from '../../components/plant/plant.vue'
 
 export default {
   name: 'shelf',
+  components: {   //component must be called here in addition to import
+    Plant,
+  },
   data(){
     return {
       shelfImage: shelfFile,
       wateringCanImage: wateringCanFile,
       wateringCanTiltedImage: wateringCanTiltedFile,
       waterImage: waterFile,
-      planterImage: planterFile,
       canIsPouring: false,
     }
   },

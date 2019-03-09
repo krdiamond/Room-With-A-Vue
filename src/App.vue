@@ -5,8 +5,6 @@
       <Window/>
       <theView/>
 
-
-
     </div>
   </div>
 </template>

@@ -9,8 +9,6 @@
         <img v-else :src="wateringCanImage"/>
     </div>
 
-    <div class="planter-pour-zone"></div>
-    
     <Plant/>
 
   </div>

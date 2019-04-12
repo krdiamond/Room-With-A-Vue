@@ -5,6 +5,8 @@
       <Window/>
       <theView/>
 
+      <div class="planter-pour-zone"></div>
+
     </div>
   </div>
 </template>

@@ -1,10 +1,9 @@
 <template>
 
-  <div id="plant">
+  <div class="planter">
 
-
-      <img id="sprout" :src="sproutImage"/>
-      <img id="planter" :src="planterImage"/>
+      <img class="sprout" :src="sproutImage"/>
+      <img class="plant" :src="planterImage"/>
 
   </div>
 </template>
@@ -24,5 +23,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" src="./plant.scss"></style>

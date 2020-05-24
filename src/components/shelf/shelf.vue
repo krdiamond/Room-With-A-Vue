@@ -1,11 +1,13 @@
 <template>
-  <div id="shelf-area">
+  <div class="shelf-container">
 
-    <img id="shelf"  :src="shelfImage"/>
-
-    <div id="watering-can" class="draggable">
-        <img id="titled-watering-can" v-if="canIsPouring" :src="wateringCanTiltedImage"/>
-        <img id="water" v-if="canIsPouring" :src="waterImage"/>
+    <div id="shelf" class="shelf">
+      <img  :src="shelfImage"/>
+    </div>
+    
+    <div class="draggable watering-can">
+        <img v-if="canIsPouring" :src="wateringCanTiltedImage"/>
+        <img class="water" v-if="canIsPouring" :src="waterImage"/>
         <img v-else :src="wateringCanImage"/>
     </div>
 
@@ -81,5 +83,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" src="./shelf.scss"></style>
